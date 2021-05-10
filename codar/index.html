@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital@1&family=Indie+Flower&display=swap" rel="stylesheet">
+    <style type="text/css">
+    body {
+        background: #EDF0F2;
+        padding: 0;
+        margin: 0;
+    }
+
+    #app{
+    padding:25px;
+    }
+
+    input{
+        width: 250px;
+        font-size:18px;
+        padding:8px;
+        border-radius: 15px;
+        border: 1px solid #ccc;
+        font-family: 'Exo 2', sans-serif;
+
+    }
+
+    #form button{
+        background:#9bcaac;
+        padding:8px 17px;
+        font-size: 18px;
+        border-radius: 10px;
+        border:0;
+        font-family: 'Exo 2', sans-serif;
+        
+    }
+    #tasks button{
+        background:transparent;
+        padding:6px 14px;
+        font-size: 14px;
+        border-radius: 4px;
+        border:0;
+        font-family: 'Exo 2', sans-serif;
+        color: rgb(189, 27, 116);
+    }
+    h1{
+        font-family: 'Exo 2', sans-serif;
+        
+        text-transform: uppercase;
+        color: rgb(77, 77, 77);
+    }
+    h2{
+        font-family: 'Exo 2', sans-serif;
+        color: rgb(77, 77, 77);
+
+    }
+    
+    </style>
+</head>
+<body>
+
+    <div id='app'>
+
+        <section id='form'>
+            <h1> Adicionar tarefas</h1>
+            <input type="text" name="text" id='task' placeholder="Descrição">
+            <button> Adicionar</button>
+
+        </section>
+
+        <section id='tasks'>
+            <h2> Tarefas </h2>
+            <ul>
+               
+            </ul>
+
+        </section>
+    </div>
+    <script type="text/javascript">
+        const tasks = [];
+        const ulElement = document.querySelector('#tasks ul');
+        
+        function add(text) {
+            const total = tasks.push(text);
+            const index = total - 1
+            const taskElement = document.createElement("li");
+            const textElement = document.createElement("span");
+            const btnElement = document.createElement("button");
+
+            taskElement.setAttribute("id", `item-${index}`)
+
+            btnElement.onclick = () =>{
+                remove(index)
+            }
+
+
+            taskElement.appendChild(textElement);
+            taskElement.appendChild(btnElement);
+
+            textElement.innerHTML = text;
+            btnElement.innerHTML="Remover";
+
+            ulElement.appendChild(taskElement);
+
+
+        }
+
+        function remove(index){
+            tasks.splice(index,1)
+            const taskElement = document.querySelector(`#tasks li#item-${index}`)
+            ulElement.removeChild(taskElement)
+
+        }
+
+      const btnElement = document.querySelector('#form button');
+      const inputElement =document.querySelector ('#form input');
+      btnElement.onclick = () => {
+          if(inputElement.value){
+          add(inputElement.value);
+          inputElement.value = "";
+          console.log(tasks)
+          }
+      }
+    
+    
+    </script>
+    
+</body>
+</html>
